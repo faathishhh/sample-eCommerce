@@ -1,16 +1,33 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const NavBar = () => {
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const navigate = useNavigate();
 
     const navLinkStyle = ({ isActive }) =>
-        `transition duration-200 ${isActive
-            ? "text-violet-700 font-semibold"
-            : "text-gray-600 hover:text-violet-700"
+        `transition duration-200 ${
+            isActive
+                ? "text-violet-700 font-semibold"
+                : "text-gray-600 hover:text-violet-700"
         }`;
+
+    // SEARCH FUNCTION
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        const search = searchTerm.trim();
+
+        if (!search) return;
+
+        navigate(`/products?search=${encodeURIComponent(search)}`);
+
+        setMenuOpen(false);
+    };
 
     return (
 
@@ -28,7 +45,6 @@ const NavBar = () => {
                         <span className="text-gray-900">IVA</span>
 
                     </Link>
-
 
                     {/* DESKTOP NAVIGATION */}
 
@@ -48,21 +64,29 @@ const NavBar = () => {
 
                     </div>
 
+                    {/* DESKTOP SEARCH BAR */}
 
-                    {/* SEARCH BAR */}
-
-                    <div className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-2 w-64">
-
-                        <Search size={18} className="text-gray-400" />
+                    <form
+                        onSubmit={handleSearch}
+                        className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-2 w-64 focus-within:ring-2 focus-within:ring-violet-300 transition"
+                    >
 
                         <input
                             type="text"
                             placeholder="Search products..."
-                            className="bg-transparent outline-none px-3 w-full text-sm"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="bg-transparent outline-none px-2 w-full text-sm"
                         />
 
-                    </div>
+                        <button type="submit" aria-label="Search products">
+                            <Search
+                                size={19}
+                                className="text-gray-500 hover:text-violet-700 cursor-pointer"
+                            />
+                        </button>
 
+                    </form>
 
                     {/* RIGHT SIDE */}
 
@@ -81,14 +105,12 @@ const NavBar = () => {
 
                         </Link>
 
-
                         <Link
                             to="/login"
                             className="text-gray-700 hover:text-violet-700 font-medium"
                         >
                             Login
                         </Link>
-
 
                         <Link
                             to="/register"
@@ -99,12 +121,12 @@ const NavBar = () => {
 
                     </div>
 
-
                     {/* MOBILE MENU BUTTON */}
 
                     <button
                         className="md:hidden text-gray-800"
                         onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
                     >
 
                         {menuOpen ? <X size={26} /> : <Menu size={26} />}
@@ -113,30 +135,65 @@ const NavBar = () => {
 
                 </div>
 
-
                 {/* MOBILE MENU */}
 
                 {menuOpen && (
 
                     <div className="md:hidden mt-5 pb-4 flex flex-col gap-5">
 
-                        <NavLink to="/" onClick={() => setMenuOpen(false)}>
+                        {/* MOBILE SEARCH */}
+
+                        <form
+                            onSubmit={handleSearch}
+                            className="flex items-center bg-gray-100 rounded-full px-4 py-3"
+                        >
+
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="bg-transparent outline-none w-full text-sm"
+                            />
+
+                            <button type="submit" aria-label="Search products">
+                                <Search size={20} className="text-violet-700" />
+                            </button>
+
+                        </form>
+
+                        <NavLink
+                            to="/"
+                            onClick={() => setMenuOpen(false)}
+                        >
                             Home
                         </NavLink>
 
-                        <NavLink to="/products" onClick={() => setMenuOpen(false)}>
+                        <NavLink
+                            to="/products"
+                            onClick={() => setMenuOpen(false)}
+                        >
                             Shop
                         </NavLink>
 
-                        <NavLink to="/products" onClick={() => setMenuOpen(false)}>
+                        <NavLink
+                            to="/products"
+                            onClick={() => setMenuOpen(false)}
+                        >
                             Categories
                         </NavLink>
 
-                        <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                        <Link
+                            to="/cart"
+                            onClick={() => setMenuOpen(false)}
+                        >
                             Shopping Cart
                         </Link>
 
-                        <Link to="/login" onClick={() => setMenuOpen(false)}>
+                        <Link
+                            to="/login"
+                            onClick={() => setMenuOpen(false)}
+                        >
                             Login
                         </Link>
 

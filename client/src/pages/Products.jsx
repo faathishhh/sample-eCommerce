@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
     ShoppingCart,
     Search,
@@ -8,7 +9,7 @@ import {
     PackageSearch,
 } from "lucide-react";
 
-const initialProducts = [
+export const initialProducts = [
     {
         _id: "1",
         productName: "Premium Wireless Headphones",
@@ -191,7 +192,10 @@ const Products = () => {
 
                     {/* Categories */}
                     <div className="flex flex-wrap gap-2 items-center">
-                        <SlidersHorizontal size={19} className="text-violet-700 mr-1" />
+                        <SlidersHorizontal
+                            size={19}
+                            className="text-violet-700 mr-1"
+                        />
 
                         {categories.map((item) => (
                             <button
@@ -231,14 +235,16 @@ const Products = () => {
                             className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 group"
                         >
 
-                            {/* Image */}
+                            {/* Product Image */}
                             <div className="relative h-64 bg-gray-100 overflow-hidden">
 
-                                <img
-                                    src={product.images?.[0]}
-                                    alt={product.productName}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                                />
+                                <Link to={`/products/${product._id}`}>
+                                    <img
+                                        src={product.images?.[0]}
+                                        alt={product.productName}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                                    />
+                                </Link>
 
                                 {/* Featured Badge */}
                                 {product.isFeatured && (
@@ -285,9 +291,12 @@ const Products = () => {
                                     </p>
                                 </div>
 
-                                <h2 className="text-lg font-bold text-gray-900 mt-3">
-                                    {product.productName}
-                                </h2>
+                                {/* Product Name */}
+                                <Link to={`/products/${product._id}`}>
+                                    <h2 className="text-lg font-bold text-gray-900 mt-3 hover:text-violet-700 transition">
+                                        {product.productName}
+                                    </h2>
+                                </Link>
 
                                 <p className="text-sm text-gray-500 mt-2 line-clamp-2">
                                     {product.description}
@@ -315,7 +324,9 @@ const Products = () => {
 
                                     <div>
                                         <p className="text-xl font-extrabold text-gray-900">
-                                            ₹{(product.discountPrice ?? product.price).toLocaleString("en-IN")}
+                                            ₹{(
+                                                product.discountPrice ?? product.price
+                                            ).toLocaleString("en-IN")}
                                         </p>
 
                                         {product.discountPrice != null && (
@@ -335,6 +346,14 @@ const Products = () => {
                                     </button>
 
                                 </div>
+
+                                {/* View Details Button */}
+                                <Link
+                                    to={`/products/${product._id}`}
+                                    className="block w-full text-center mt-4 border border-violet-600 text-violet-700 py-3 rounded-xl font-semibold hover:bg-violet-700 hover:text-white transition"
+                                >
+                                    View Details
+                                </Link>
 
                             </div>
                         </div>
