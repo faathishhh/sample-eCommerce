@@ -1,24 +1,13 @@
+import express from 'express';
 
+import { addProduct, getProducts } from '../controllers/productControllers.js';
 
-import express from 'express'
-import { addProduct } from '../controllers/productControllers.js'
-import authenticate from '../middlewares/authMiddleware.js'
+import authenticate from '../middlewares/authMiddleware.js';
 
+const router = express.Router();
 
-const router = express.Router()
+router.post("/add-product", authenticate, addProduct);
 
+router.get("/get-products", getProducts);
 
-
-
-router.post("/add-product",authenticate, addProduct)
-
-
-
-
-
-export default router
-
-
-
-
-
+export default router;

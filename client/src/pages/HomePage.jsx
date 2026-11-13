@@ -1,469 +1,674 @@
 import { Link } from "react-router-dom";
-import {
-    ArrowRight,
-    ShoppingBag,
-    Truck,
-    ShieldCheck,
-    Headphones,
-    Star,
-    Sparkles,
-} from "lucide-react";
+import { ArrowRight, ShoppingBag, Truck, ShieldCheck, Headphones, Star, Sparkles, CreditCard, Heart, MoveRight, Zap, Clock, Gift, CheckCircle, } from "lucide-react";
+import { initialProducts } from "./Products";
 
 const categories = [
     {
         name: "Electronics",
-        description: "Upgrade your everyday life",
-        image:
-            "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600",
+        subtitle: "Technology made simple",
+        image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800",
+        number: "01",
     },
     {
         name: "Fashion",
-        description: "Find your perfect style",
-        image:
-            "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600",
+        subtitle: "Style that speaks",
+        image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800",
+        number: "02",
     },
     {
         name: "Home & Living",
-        description: "Make your space beautiful",
-        image:
-            "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600",
+        subtitle: "Make yourself at home",
+        image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800",
+        number: "03",
     },
 ];
 
-const featuredProducts = [
+const benefits = [
     {
-        _id: "1",
-        productName: "Premium Wireless Headphones",
-        price: 3499,
-        discountPrice: 2499,
-        ratings: 4.8,
-        images: [
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
-        ],
+        icon: Truck,
+        title: "Free & Fast Delivery",
+        description: "Enjoy convenient delivery on eligible orders.",
     },
     {
-        _id: "2",
-        productName: "Classic Wrist Watch",
-        price: 2499,
-        discountPrice: 1899,
-        ratings: 4.5,
-        images: [
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
-        ],
+        icon: ShieldCheck,
+        title: "Secure Shopping",
+        description: "Shop confidently with secure transactions.",
     },
     {
-        _id: "3",
-        productName: "Modern Backpack",
-        price: 1999,
-        discountPrice: 1499,
-        ratings: 4.6,
-        images: [
-            "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600",
-        ],
+        icon: CreditCard,
+        title: "Easy Payments",
+        description: "A convenient shopping experience from start to finish.",
     },
     {
-        _id: "4",
-        productName: "Stylish Sunglasses",
-        price: 1499,
-        discountPrice: 999,
-        ratings: 4.4,
-        images: [
-            "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600",
-        ],
+        icon: Headphones,
+        title: "Customer Support",
+        description: "We're always ready to help you.",
     },
 ];
 
-const HomePage = () => {
+const Home = () => {
+
+    const featuredProducts = initialProducts
+        .filter((product) => product.isFeatured && product.isActive !== false)
+        .slice(0, 4);
+
+    const displayProducts =
+        featuredProducts.length > 0
+            ? featuredProducts
+            : initialProducts.filter(
+                (product) => product.isActive !== false
+            ).slice(0, 4);
+
     return (
-        <div className="bg-[#F8F7FC] min-h-screen">
+
+        <main className="bg-[#FAF9FE] min-h-screen overflow-hidden">
 
             {/* HERO SECTION */}
-            <section className="px-5 md:px-12 pt-8">
-                <div className="max-w-7xl mx-auto bg-gradient-to-br from-violet-800 via-violet-700 to-purple-950 rounded-[30px] overflow-hidden">
 
-                    <div className="grid md:grid-cols-2 items-center">
+            <section className="px-4 sm:px-6 lg:px-10 pt-6">
 
-                        {/* Hero Content */}
-                        <div className="p-8 md:p-14 lg:p-16 text-white">
+                <div className="max-w-7xl mx-auto relative overflow-hidden rounded-[30px] bg-gradient-to-br from-[#321064] via-[#5822A5] to-[#8655D8]">
 
-                            <div className="inline-flex items-center gap-2 bg-white/15 px-4 py-2 rounded-full text-sm font-medium mb-7">
+                    <div className="grid lg:grid-cols-2 items-center">
+
+                        {/* HERO CONTENT */}
+
+                        <div className="relative z-10 p-7 sm:p-10 lg:p-16 text-white">
+
+                            <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 rounded-full px-4 py-2 text-sm mb-7">
+
                                 <Sparkles size={16} />
-                                Discover a better way to shop
+
+                                Your favourite shopping destination
+
                             </div>
 
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-                                Everything You Love,
-                                <span className="block text-violet-200">
-                                    All in One Place.
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.12] tracking-tight">
+
+                                Discover More.
+
+                                <span className="block text-violet-200 mt-2">
+                                    Shop Better.
                                 </span>
+
                             </h1>
 
-                            <p className="text-violet-100 mt-6 leading-7 max-w-lg">
-                                Discover amazing collections, explore trending products
-                                and enjoy a shopping experience designed around you.
+                            <p className="text-violet-100 text-base sm:text-lg leading-8 mt-7 max-w-lg">
+
+                                Explore products you'll love, discover exciting
+                                collections and enjoy a shopping experience
+                                that makes every purchase special.
+
                             </p>
 
                             <div className="flex flex-wrap gap-4 mt-9">
 
                                 <Link
                                     to="/products"
-                                    className="bg-white text-violet-800 px-7 py-3.5 rounded-xl font-bold flex items-center gap-2 hover:bg-violet-100 transition"
+                                    className="inline-flex items-center gap-3 bg-white text-violet-800 px-7 py-4 rounded-xl font-bold hover:bg-violet-100 transition duration-300 shadow-xl"
                                 >
-                                    Shop Now
-                                    <ArrowRight size={19} />
+
+                                    Start Shopping
+
+                                    <ArrowRight size={20} />
+
                                 </Link>
 
                                 <Link
                                     to="/products"
-                                    className="border border-white/50 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-white/10 transition"
+                                    className="inline-flex items-center gap-2 border border-white/40 text-white px-7 py-4 rounded-xl font-semibold hover:bg-white/10 transition"
                                 >
-                                    Explore Collections
+
+                                    Explore Collection
+
                                 </Link>
 
                             </div>
 
-                            <div className="flex gap-8 mt-12">
+                            <div className="flex flex-wrap gap-7 sm:gap-10 mt-12 pt-8 border-t border-white/20">
 
                                 <div>
-                                    <h3 className="text-2xl font-bold">1000+</h3>
-                                    <p className="text-violet-200 text-sm">Products</p>
+                                    <h3 className="text-3xl font-extrabold">
+                                        100%
+                                    </h3>
+                                    <p className="text-violet-200 text-sm mt-1">
+                                        Shopping Experience
+                                    </p>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-2xl font-bold">500+</h3>
-                                    <p className="text-violet-200 text-sm">Happy Customers</p>
+                                    <h3 className="text-3xl font-extrabold">
+                                        24/7
+                                    </h3>
+                                    <p className="text-violet-200 text-sm mt-1">
+                                        Customer Support
+                                    </p>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-2xl font-bold">24/7</h3>
-                                    <p className="text-violet-200 text-sm">Support</p>
+                                    <h3 className="text-3xl font-extrabold">
+                                        Easy
+                                    </h3>
+                                    <p className="text-violet-200 text-sm mt-1">
+                                        Online Shopping
+                                    </p>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        {/* Hero Image */}
-                        <div className="h-80 md:h-full min-h-[450px] relative">
+                        {/* HERO IMAGE */}
+
+                        <div className="relative min-h-[350px] lg:min-h-[650px] p-5 sm:p-8">
 
                             <img
-                                src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1000"
-                                alt="Shopping collection"
-                                className="w-full h-full object-cover"
+                                src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200"
+                                alt="CARTIVA shopping collection"
+                                className="w-full h-full min-h-[350px] lg:min-h-[590px] object-cover rounded-3xl"
                             />
 
-                            <div className="absolute inset-0 bg-gradient-to-r from-violet-800/30 to-transparent"></div>
+                            <div className="absolute inset-5 sm:inset-8 rounded-3xl bg-gradient-to-t from-purple-950/50 to-transparent"></div>
 
-                            <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-xl">
+                            <div className="absolute bottom-12 left-10 sm:left-14 bg-white rounded-2xl p-5 shadow-2xl max-w-[240px]">
 
-                                <p className="text-sm text-gray-500">
-                                    Your shopping destination
-                                </p>
+                                <div className="flex items-center gap-2 text-violet-700">
 
-                                <h3 className="text-xl font-bold text-violet-800 mt-1">
-                                    Discover CARTIVA
-                                </h3>
+                                    <Sparkles size={18} />
 
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* CATEGORIES SECTION */}
-            <section className="px-5 md:px-12 py-20">
-
-                <div className="max-w-7xl mx-auto">
-
-                    <div className="flex justify-between items-end mb-10">
-
-                        <div>
-                            <p className="text-violet-700 font-semibold uppercase tracking-widest text-sm">
-                                Explore collections
-                            </p>
-
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-3">
-                                Shop by Category
-                            </h2>
-
-                            <p className="text-gray-500 mt-2">
-                                Find everything you need in one place.
-                            </p>
-                        </div>
-
-                        <Link
-                            to="/products"
-                            className="hidden sm:flex items-center gap-2 text-violet-700 font-semibold hover:underline"
-                        >
-                            View All
-                            <ArrowRight size={18} />
-                        </Link>
-
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-
-                        {categories.map((category) => (
-
-                            <Link
-                                to="/products"
-                                key={category.name}
-                                className="group relative h-80 rounded-2xl overflow-hidden shadow-sm"
-                            >
-
-                                <img
-                                    src={category.image}
-                                    alt={category.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                                />
-
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
-
-                                <div className="absolute bottom-0 left-0 p-7 text-white">
-
-                                    <h3 className="text-2xl font-bold">
-                                        {category.name}
-                                    </h3>
-
-                                    <p className="text-gray-200 mt-2">
-                                        {category.description}
-                                    </p>
-
-                                    <span className="inline-flex items-center gap-2 mt-4 font-semibold">
-                                        Explore Now
-                                        <ArrowRight size={18} />
+                                    <span className="text-xs font-bold uppercase tracking-wider">
+                                        CARTIVA COLLECTION
                                     </span>
 
                                 </div>
 
-                            </Link>
+                                <h3 className="text-xl font-extrabold text-gray-900 mt-3">
+                                    Find Your Next Favourite.
+                                </h3>
 
-                        ))}
+                                <Link
+                                    to="/products"
+                                    className="text-violet-700 font-semibold text-sm flex items-center gap-2 mt-3"
+                                >
+                                    Shop Now <ArrowRight size={16} />
+                                </Link>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
+
             </section>
 
+
+            {/* TRUST HIGHLIGHTS */}
+
+            <section className="max-w-7xl mx-auto px-5 sm:px-8 py-10">
+
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+
+                    {[
+                        {
+                            icon: Truck,
+                            title: "Fast Delivery",
+                            text: "Convenient delivery",
+                        },
+                        {
+                            icon: ShieldCheck,
+                            title: "Secure Shopping",
+                            text: "Shop with confidence",
+                        },
+                        {
+                            icon: CreditCard,
+                            title: "Easy Payments",
+                            text: "Simple checkout",
+                        },
+                        {
+                            icon: Headphones,
+                            title: "24/7 Support",
+                            text: "We're here to help",
+                        },
+                    ].map((item) => {
+
+                        const Icon = item.icon;
+
+                        return (
+
+                            <div
+                                key={item.title}
+                                className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-gray-100 hover:shadow-lg transition"
+                            >
+
+                                <div className="w-12 h-12 shrink-0 rounded-xl bg-violet-100 flex items-center justify-center">
+
+                                    <Icon size={23} className="text-violet-700" />
+
+                                </div>
+
+                                <div>
+                                    <h3 className="font-bold text-gray-900 text-sm sm:text-base">
+                                        {item.title}
+                                    </h3>
+
+                                    <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                                        {item.text}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        );
+
+                    })}
+
+                </div>
+
+            </section>
+
+
+            {/* CATEGORY SECTION */}
+
+            <section className="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-9">
+
+                    <div>
+
+                        <p className="text-violet-700 font-bold uppercase tracking-[3px] text-xs">
+                            Explore our collections
+                        </p>
+
+                        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">
+                            Shop by Category
+                        </h2>
+
+                        <p className="text-gray-500 mt-3">
+                            Discover something special in every collection.
+                        </p>
+
+                    </div>
+
+                    <Link
+                        to="/products"
+                        className="inline-flex items-center gap-2 text-violet-700 font-bold hover:gap-4 transition-all"
+                    >
+                        View All Categories <MoveRight size={19} />
+                    </Link>
+
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    {categories.map((category) => (
+
+                        <Link
+                            to="/products"
+                            key={category.name}
+                            className="group relative h-[350px] rounded-3xl overflow-hidden"
+                        >
+
+                            <img
+                                src={category.image}
+                                alt={category.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                            />
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+
+                            <div className="absolute top-5 right-5 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full px-4 py-2 text-xs font-bold">
+                                COLLECTION {category.number}
+                            </div>
+
+                            <div className="absolute bottom-0 left-0 p-7 text-white">
+
+                                <p className="text-violet-200 text-sm font-medium">
+                                    {category.subtitle}
+                                </p>
+
+                                <h3 className="text-3xl font-extrabold mt-2">
+                                    {category.name}
+                                </h3>
+
+                                <span className="inline-flex items-center gap-2 mt-5 font-semibold group-hover:gap-4 transition-all">
+                                    Explore Collection
+                                    <ArrowRight size={18} />
+                                </span>
+
+                            </div>
+
+                        </Link>
+
+                    ))}
+
+                </div>
+
+            </section>
+
+
             {/* FEATURED PRODUCTS */}
-            <section className="px-5 md:px-12 py-16 bg-white">
 
-                <div className="max-w-7xl mx-auto">
+            <section className="bg-white py-20">
 
-                    <div className="flex justify-between items-end mb-10">
+                <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10">
 
                         <div>
-                            <p className="text-violet-700 font-semibold uppercase tracking-widest text-sm">
-                                Handpicked for you
-                            </p>
 
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-3">
+                            <div className="flex items-center gap-2 text-violet-700">
+
+                                <Zap size={18} />
+
+                                <p className="font-bold uppercase tracking-[3px] text-xs">
+                                    Trending now
+                                </p>
+
+                            </div>
+
+                            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">
                                 Featured Products
                             </h2>
 
-                            <p className="text-gray-500 mt-2">
-                                Discover some of our most-loved picks.
+                            <p className="text-gray-500 mt-3">
+                                Handpicked products worth exploring.
                             </p>
+
                         </div>
 
                         <Link
                             to="/products"
-                            className="hidden sm:flex items-center gap-2 text-violet-700 font-semibold hover:underline"
+                            className="inline-flex items-center gap-2 text-violet-700 font-bold hover:gap-4 transition-all"
                         >
-                            View All
-                            <ArrowRight size={18} />
+                            View All Products <ArrowRight size={19} />
                         </Link>
 
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
 
-                        {featuredProducts.map((product) => (
+                    {displayProducts.length > 0 ? (
 
-                            <div
-                                key={product._id}
-                                className="group bg-[#F8F7FC] rounded-2xl overflow-hidden hover:shadow-xl transition duration-300"
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+                            {displayProducts.map((product) => {
+
+                                const image = product.images?.[0];
+
+                                const hasDiscount =
+                                    product.discountPrice != null &&
+                                    product.discountPrice < product.price;
+
+                                return (
+
+                                    <div
+                                        key={product._id}
+                                        className="group bg-[#FAF9FE] rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300"
+                                    >
+
+                                        <Link
+                                            to={`/products/${product._id}`}
+                                            className="block relative h-64 overflow-hidden"
+                                        >
+
+                                            {image ? (
+
+                                                <img
+                                                    src={image}
+                                                    alt={product.productName}
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                                                />
+
+                                            ) : (
+
+                                                <div className="w-full h-full flex items-center justify-center bg-violet-100">
+                                                    <ShoppingBag size={45} className="text-violet-400" />
+                                                </div>
+
+                                            )}
+
+                                            <span className="absolute top-4 left-4 bg-violet-700 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                                {product.isFeatured ? "FEATURED" : "POPULAR"}
+                                            </span>
+
+                                            <div className="absolute top-4 right-4 bg-white p-2.5 rounded-full text-gray-500 shadow-md">
+                                                <Heart size={17} />
+                                            </div>
+
+                                        </Link>
+
+
+                                        <div className="p-5">
+
+                                            <p className="text-xs uppercase tracking-wider text-violet-600 font-bold">
+                                                {product.brand || product.category}
+                                            </p>
+
+                                            <Link to={`/products/${product._id}`}>
+
+                                                <h3 className="font-bold text-gray-900 text-lg mt-2 line-clamp-1 hover:text-violet-700 transition">
+                                                    {product.productName}
+                                                </h3>
+
+                                            </Link>
+
+
+                                            <div className="flex items-center gap-1 mt-3">
+
+                                                <Star
+                                                    size={16}
+                                                    fill="currentColor"
+                                                    className="text-yellow-400"
+                                                />
+
+                                                <span className="text-sm font-semibold text-gray-700">
+                                                    {product.ratings || 0}
+                                                </span>
+
+                                                <span className="text-xs text-gray-400">
+                                                    ({product.numReviews || 0} reviews)
+                                                </span>
+
+                                            </div>
+
+
+                                            <div className="flex items-center gap-3 mt-4">
+
+                                                <span className="text-xl font-extrabold text-violet-700">
+                                                    ₹{(hasDiscount
+                                                        ? product.discountPrice
+                                                        : product.price
+                                                    ).toLocaleString("en-IN")}
+                                                </span>
+
+                                                {hasDiscount && (
+
+                                                    <span className="text-sm text-gray-400 line-through">
+                                                        ₹{product.price.toLocaleString("en-IN")}
+                                                    </span>
+
+                                                )}
+
+                                            </div>
+
+
+                                            <Link
+                                                to={`/products/${product._id}`}
+                                                className="mt-5 w-full bg-violet-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-violet-800 transition"
+                                            >
+
+                                                View Product
+
+                                                <ArrowRight size={17} />
+
+                                            </Link>
+
+                                        </div>
+
+                                    </div>
+
+                                );
+
+                            })}
+
+                        </div>
+
+                    ) : (
+
+                        <div className="text-center py-16 bg-[#FAF9FE] rounded-2xl">
+
+                            <ShoppingBag size={45} className="mx-auto text-violet-400" />
+
+                            <h3 className="text-xl font-bold mt-4">
+                                Products Coming Soon
+                            </h3>
+
+                            <p className="text-gray-500 mt-2">
+                                We're preparing something special for you.
+                            </p>
+
+                            <Link
+                                to="/products"
+                                className="inline-flex mt-5 bg-violet-700 text-white px-6 py-3 rounded-xl font-semibold"
                             >
+                                Explore Shop
+                            </Link>
 
-                                <div className="h-64 overflow-hidden relative">
+                        </div>
 
-                                    <img
-                                        src={product.images[0]}
-                                        alt={product.productName}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                                    />
+                    )}
 
-                                    <span className="absolute top-4 left-4 bg-violet-700 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                                        FEATURED
-                                    </span>
+                </div>
 
-                                </div>
+            </section>
 
-                                <div className="p-5">
 
-                                    <h3 className="font-bold text-gray-900 text-lg">
-                                        {product.productName}
+            {/* SPECIAL OFFER SECTION */}
+
+            <section className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
+
+                <div className="relative overflow-hidden rounded-[30px] bg-gradient-to-r from-[#321064] to-[#7540C5] p-8 sm:p-12 lg:p-16">
+
+                    <div className="absolute -right-20 -top-32 w-80 h-80 rounded-full bg-white/10"></div>
+
+                    <div className="absolute right-20 -bottom-40 w-80 h-80 rounded-full bg-white/10"></div>
+
+                    <div className="relative z-10 grid md:grid-cols-2 items-center gap-10">
+
+                        <div className="text-white">
+
+                            <div className="inline-flex items-center gap-2 bg-white/15 px-4 py-2 rounded-full text-sm font-semibold">
+                                <Gift size={17} />
+                                A better way to shop
+                            </div>
+
+                            <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight mt-6">
+                                Great Finds.
+                                <br />
+                                Better Choices.
+                            </h2>
+
+                            <p className="text-violet-100 leading-7 mt-5 max-w-lg">
+                                From everyday essentials to special finds,
+                                discover products that make your life better.
+                            </p>
+
+                            <Link
+                                to="/products"
+                                className="inline-flex items-center gap-3 bg-white text-violet-800 px-7 py-4 rounded-xl font-bold mt-8 hover:bg-violet-100 transition"
+                            >
+                                Explore Products
+                                <ArrowRight size={19} />
+                            </Link>
+
+                        </div>
+
+
+                        <div className="hidden md:flex justify-center">
+
+                            <div className="w-64 h-64 rounded-full border border-white/30 bg-white/10 flex items-center justify-center">
+
+                                <div className="w-48 h-48 rounded-full border border-white/40 bg-white/10 flex flex-col items-center justify-center text-white">
+
+                                    <Sparkles size={45} />
+
+                                    <h3 className="text-3xl font-extrabold mt-4">
+                                        CARTIVA
                                     </h3>
 
-                                    <div className="flex items-center gap-1 mt-2">
-                                        <Star
-                                            size={16}
-                                            fill="currentColor"
-                                            className="text-yellow-400"
-                                        />
-
-                                        <span className="text-sm text-gray-600">
-                                            {product.ratings}
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3 mt-4">
-
-                                        <span className="text-xl font-extrabold text-violet-700">
-                                            ₹{product.discountPrice.toLocaleString("en-IN")}
-                                        </span>
-
-                                        <span className="text-sm text-gray-400 line-through">
-                                            ₹{product.price.toLocaleString("en-IN")}
-                                        </span>
-
-                                    </div>
-
-                                    <Link
-                                        to="/products"
-                                        className="mt-5 w-full bg-violet-700 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-violet-800 transition"
-                                    >
-                                        <ShoppingBag size={18} />
-                                        Shop Now
-                                    </Link>
+                                    <p className="text-violet-200 text-xs tracking-widest mt-2">
+                                        DISCOVER MORE
+                                    </p>
 
                                 </div>
 
                             </div>
 
-                        ))}
-
-                    </div>
-
-                </div>
-            </section>
-
-            {/* SPECIAL OFFER BANNER */}
-            <section className="px-5 md:px-12 py-20">
-
-                <div className="max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-purple-950 to-violet-700 p-8 md:p-14 flex flex-col md:flex-row items-center justify-between gap-10">
-
-                    <div className="text-white">
-
-                        <p className="text-violet-200 font-semibold uppercase tracking-widest text-sm">
-                            Special shopping experience
-                        </p>
-
-                        <h2 className="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">
-                            Great Finds.
-                            <br />
-                            Better Prices.
-                        </h2>
-
-                        <p className="text-violet-200 mt-5 max-w-lg leading-7">
-                            Discover exciting deals and amazing collections.
-                            Your next favourite product is waiting for you.
-                        </p>
-
-                        <Link
-                            to="/products"
-                            className="inline-flex items-center gap-2 mt-8 bg-white text-violet-800 px-7 py-3.5 rounded-xl font-bold hover:bg-violet-100 transition"
-                        >
-                            Explore Deals
-                            <ArrowRight size={19} />
-                        </Link>
-
-                    </div>
-
-                    <div className="bg-white/10 border border-white/20 rounded-3xl p-10 text-center text-white">
-
-                        <Sparkles size={55} className="mx-auto text-violet-200" />
-
-                        <h3 className="text-4xl font-extrabold mt-5">
-                            CARTIVA
-                        </h3>
-
-                        <p className="text-violet-200 mt-2">
-                            Discover More. Shop Better.
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
 
             </section>
+
 
             {/* WHY CHOOSE CARTIVA */}
-            <section className="px-5 md:px-12 py-16 bg-white">
 
-                <div className="max-w-7xl mx-auto text-center">
+            <section className="bg-white py-20">
 
-                    <p className="text-violet-700 font-semibold uppercase tracking-widest text-sm">
-                        The CARTIVA experience
-                    </p>
+                <div className="max-w-7xl mx-auto px-5 sm:px-8">
 
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-3">
-                        Why Shop With Us?
-                    </h2>
+                    <div className="text-center max-w-2xl mx-auto">
 
-                    <p className="text-gray-500 mt-3">
-                        We make shopping simple, comfortable and enjoyable.
-                    </p>
+                        <p className="text-violet-700 font-bold uppercase tracking-[3px] text-xs">
+                            The CARTIVA experience
+                        </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-14">
+                        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-4">
+                            Shopping Made Better
+                        </h2>
 
-                        {[
-                            {
-                                icon: ShoppingBag,
-                                title: "Quality Products",
-                                description: "Explore carefully selected products.",
-                            },
-                            {
-                                icon: Truck,
-                                title: "Fast Delivery",
-                                description: "Get your favourite products delivered.",
-                            },
-                            {
-                                icon: ShieldCheck,
-                                title: "Secure Shopping",
-                                description: "Enjoy a safe shopping experience.",
-                            },
-                            {
-                                icon: Headphones,
-                                title: "Customer Support",
-                                description: "We're here whenever you need help.",
-                            },
-                        ].map((feature) => {
+                        <p className="text-gray-500 mt-4 leading-7">
+                            We believe shopping should be simple,
+                            comfortable and enjoyable.
+                        </p>
 
-                            const Icon = feature.icon;
+                    </div>
+
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+
+                        {benefits.map((benefit) => {
+
+                            const Icon = benefit.icon;
 
                             return (
+
                                 <div
-                                    key={feature.title}
-                                    className="p-7 rounded-2xl bg-[#F8F7FC] hover:bg-violet-50 transition"
+                                    key={benefit.title}
+                                    className="text-center p-8 rounded-2xl bg-[#FAF9FE] hover:bg-violet-50 hover:-translate-y-1 transition duration-300"
                                 >
 
-                                    <div className="w-16 h-16 rounded-2xl bg-violet-100 flex items-center justify-center mx-auto">
+                                    <div className="w-16 h-16 mx-auto rounded-2xl bg-violet-100 flex items-center justify-center">
+
                                         <Icon size={30} className="text-violet-700" />
+
                                     </div>
 
-                                    <h3 className="font-bold text-gray-900 text-lg mt-5">
-                                        {feature.title}
+                                    <h3 className="text-lg font-bold text-gray-900 mt-6">
+                                        {benefit.title}
                                     </h3>
 
-                                    <p className="text-gray-500 text-sm mt-2 leading-6">
-                                        {feature.description}
+                                    <p className="text-gray-500 text-sm leading-6 mt-3">
+                                        {benefit.description}
                                     </p>
 
                                 </div>
+
                             );
+
                         })}
 
                     </div>
@@ -472,83 +677,65 @@ const HomePage = () => {
 
             </section>
 
-            {/* <footer className="bg-purple-950 text-white px-5 md:px-12 py-14">
 
-                <div className="max-w-7xl mx-auto">
+            {/* NEWSLETTER SECTION */}
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+            <section className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
 
-                        <div className="md:col-span-2">
+                <div className="bg-violet-50 border border-violet-100 rounded-3xl p-8 sm:p-12 text-center">
 
-                            <h2 className="text-3xl font-extrabold tracking-tight">
-                                CARTIVA
-                            </h2>
+                    <div className="w-14 h-14 rounded-2xl bg-violet-100 mx-auto flex items-center justify-center">
 
-                            <p className="text-violet-300 mt-3">
-                                Discover More. Shop Better.
-                            </p>
-
-                            <p className="text-gray-300 mt-5 leading-7 max-w-sm">
-                                Your favourite shopping destination.
-                                Discover products you love and enjoy
-                                a better way to shop.
-                            </p>
-
-                        </div>
-
-                        <div>
-
-                            <h3 className="font-bold text-lg mb-5">
-                                Quick Links
-                            </h3>
-
-                            <div className="flex flex-col gap-3 text-gray-300">
-
-                                <Link to="/" className="hover:text-white">Home</Link>
-                                <Link to="/products" className="hover:text-white">Shop</Link>
-                                <Link to="/cart" className="hover:text-white">My Cart</Link>
-                                <Link to="/login" className="hover:text-white">Login</Link>
-
-                            </div>
-
-                        </div>
-
-                        <div>
-
-                            <h3 className="font-bold text-lg mb-5">
-                                Account
-                            </h3>
-
-                            <div className="flex flex-col gap-3 text-gray-300">
-
-                                <Link to="/register" className="hover:text-white">
-                                    Create Account
-                                </Link>
-
-                                <Link to="/login" className="hover:text-white">
-                                    Sign In
-                                </Link>
-
-                                <Link to="/products" className="hover:text-white">
-                                    Explore Products
-                                </Link>
-
-                            </div>
-
-                        </div>
+                        <Sparkles size={27} className="text-violet-700" />
 
                     </div>
 
-                    <div className="border-t border-white/15 mt-12 pt-7 text-center text-sm text-gray-400">
-                        © 2026 CARTIVA. All rights reserved.
-                    </div>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-6">
+                        Stay in the Loop
+                    </h2>
+
+                    <p className="text-gray-500 mt-4 max-w-lg mx-auto leading-7">
+                        Discover new arrivals, exciting collections and
+                        updates from CARTIVA.
+                    </p>
+
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            alert("Newsletter subscription will be available soon!");
+                        }}
+                        className="max-w-lg mx-auto flex flex-col sm:flex-row gap-3 mt-8"
+                    >
+
+                        <input
+                            type="email"
+                            required
+                            placeholder="Enter your email address"
+                            className="flex-1 min-w-0 px-5 py-4 rounded-xl border border-gray-200 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 bg-white"
+                        />
+
+                        <button
+                            type="submit"
+                            className="bg-violet-700 text-white px-7 py-4 rounded-xl font-bold hover:bg-violet-800 transition"
+                        >
+                            Subscribe
+                        </button>
+
+                    </form>
+
+                    <p className="text-xs text-gray-400 mt-5 flex items-center justify-center gap-2">
+                        <CheckCircle size={14} />
+                        Stay updated with CARTIVA.
+                    </p>
 
                 </div>
 
-            </footer> */}
+            </section>
 
-        </div>
+        </main>
+
     );
+
 };
 
-export default HomePage;
+export default Home;

@@ -8,27 +8,33 @@ import Cart from "./pages/Cart";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import ProductDetails from "./pages/ProductDetails";
+import HomeLayout from "../layouts/HomeLayout";
 
 function App() {
   return (
-    <BrowserRouter>
+    <div>
+      <NavBar />
 
-    <NavBar/>
 
 
       <Routes>
-        <Route path="/" element={ <HomePage/> } />
-        <Route path="/products" element={<Products/> } />
-        <Route path="/cart" element={<Cart/> } />
-        <Route path="/login" element={ <Login/> } />
-        <Route path="/register" element={ <Register/> } />
-        <Route path="/products/:id" element={ <ProductDetails/> } />
+
+        {/* <HomeLayout/> */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
 
-      <Footer/>
+      <Footer />
 
 
-    </BrowserRouter>
+
+    </div>
+
+
   );
 }
 

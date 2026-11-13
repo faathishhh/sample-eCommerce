@@ -143,7 +143,7 @@ const Products = () => {
         );
     };
 
-    // Add to cart (UI demonstration only)
+    // Add to cart 
     const handleAddToCart = (product) => {
         if (product.stock === 0) {
             alert("Sorry! This product is out of stock.");

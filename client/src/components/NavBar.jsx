@@ -39,7 +39,7 @@ const NavBar = () => {
 
                     {/* LOGO */}
 
-                    <Link to="/" className="text-3xl font-extrabold tracking-tight">
+                    <Link to={"/"} className="text-3xl font-extrabold tracking-tight">
 
                         <span className="text-violet-700">CART</span>
                         <span className="text-gray-900">IVA</span>
@@ -50,15 +50,15 @@ const NavBar = () => {
 
                     <div className="hidden md:flex items-center gap-8">
 
-                        <NavLink to="/" className={navLinkStyle}>
+                        <NavLink to={"/"} className={navLinkStyle}>
                             Home
                         </NavLink>
 
-                        <NavLink to="/products" className={navLinkStyle}>
+                        <NavLink to={"/products"} className={navLinkStyle}>
                             Shop
                         </NavLink>
 
-                        <NavLink to="/products" className={navLinkStyle}>
+                        <NavLink to={"/products"} className={navLinkStyle}>
                             Categories
                         </NavLink>
 
@@ -93,7 +93,7 @@ const NavBar = () => {
                     <div className="hidden md:flex items-center gap-5">
 
                         <Link
-                            to="/cart"
+                            to={"/cart"}
                             className="relative text-gray-700 hover:text-violet-700 transition"
                         >
 
@@ -106,14 +106,14 @@ const NavBar = () => {
                         </Link>
 
                         <Link
-                            to="/login"
+                            to={"/login"}
                             className="text-gray-700 hover:text-violet-700 font-medium"
                         >
                             Login
                         </Link>
 
                         <Link
-                            to="/register"
+                            to={"/register"}
                             className="bg-violet-700 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-violet-800 transition shadow-md shadow-violet-200"
                         >
                             Sign Up
@@ -163,42 +163,42 @@ const NavBar = () => {
                         </form>
 
                         <NavLink
-                            to="/"
+                            to={"/"}
                             onClick={() => setMenuOpen(false)}
                         >
                             Home
                         </NavLink>
 
                         <NavLink
-                            to="/products"
+                            to={"/products"}
                             onClick={() => setMenuOpen(false)}
                         >
                             Shop
                         </NavLink>
 
                         <NavLink
-                            to="/products"
+                            to={"/products"}
                             onClick={() => setMenuOpen(false)}
                         >
                             Categories
                         </NavLink>
 
                         <Link
-                            to="/cart"
+                            to={"/cart"}
                             onClick={() => setMenuOpen(false)}
                         >
                             Shopping Cart
                         </Link>
 
                         <Link
-                            to="/login"
+                            to={"/login"}
                             onClick={() => setMenuOpen(false)}
                         >
                             Login
                         </Link>
 
                         <Link
-                            to="/register"
+                            to={"/register"}
                             onClick={() => setMenuOpen(false)}
                             className="bg-violet-700 text-white text-center py-3 rounded-full"
                         >
